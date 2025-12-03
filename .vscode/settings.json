@@ -1,0 +1,11 @@
+{
+  "python.analysis.extraPaths": ["./"],
+  "python.testing.pytestArgs": [
+    // --cov, --cov-report=xml arguments prevent debug, so comment when you need to debug
+    // "--cov",
+    // "--cov-report=xml",
+    "-s" // show print
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
+}
