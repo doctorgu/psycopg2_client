@@ -1,6 +1,8 @@
 psycopg2-binary==2.9.9
+Flask==3.1.2
 pyhumps==3.8.0
 typing-extensions==4.13.1
+python-dotenv==1.2.1
 # pytest==8.1.1
 # pytest-cov==5.0.0
 # pytest-env==1.1.3
