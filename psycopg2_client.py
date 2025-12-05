@@ -49,7 +49,7 @@ class Psycopg2ClientPool:
         self.conn_pool.putconn(conn)
 
 
-db_pool: Psycopg2ClientPool = None
+db_set_and_pool: dict[Psycopg2ClientSettings, Psycopg2ClientPool] = {}
 
 
 class Psycopg2Client:
@@ -59,8 +59,8 @@ class Psycopg2Client:
     _conn_pool: pool.ThreadedConnectionPool = None
 
     def __init__(self, db_settings: Psycopg2ClientSettings):
-        # pylint:disable=global-statement
-        global db_pool
+        # pylint:disable=global-statement,global-variable-not-assigned
+        global db_set_and_pool
 
         self.conn = None
         self.cursor = None
@@ -68,9 +68,9 @@ class Psycopg2Client:
         self.db_settings = db_settings
         self.query_recent = ""
 
-        if not db_pool:
-            db_pool = Psycopg2ClientPool(db_settings)
-        Psycopg2Client._conn_pool = db_pool
+        if db_settings not in db_set_and_pool:
+            db_set_and_pool[db_settings] = Psycopg2ClientPool(db_settings)
+            Psycopg2Client._conn_pool = db_set_and_pool[db_settings]
 
     def __enter__(self):
         # Called when entering the 'with' block
@@ -450,7 +450,9 @@ def close_all_connection():
     """call when python exits"""
 
     # pylint:disable=global-statement
-    global db_pool
+    global db_set_and_pool
 
-    if db_pool:
-        db_pool = None
+    for k, v in db_set_and_pool.items():
+        if v:
+            v = None
+    db_set_and_pool = {}

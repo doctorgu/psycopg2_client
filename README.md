@@ -225,8 +225,8 @@ The `#if` preprocessor **only allows**:
 Any attempt to inject raw SQL will raise a parsing error **before** execution.
 
 ```python
-# This will RAISE an exception (not execute!)
-"#if user_id; DROP TABLE users; --"
+# This will RAISE an exception "ValueError: 'user_id;' not in ..." (not execute!)
+"#if user_id; DROP TABLE t_user; --"
 ```
 
 ## Features Summary
@@ -239,7 +239,7 @@ Any attempt to inject raw SQL will raise a parsing error **before** execution.
 | Batch CUD operations         | Yes       | `updates()` returns list of counts |
 | Transactions via `with`      | Yes       | Auto rollback on exception         |
 | Conditional SQL              | Yes       | `#if` / `#elif` / `#endif`         |
-| Bilingual column aliases     | Yes       | `"en\|ko"` syntax                  |
+| Bilingual column aliases     | Yes       | `"Name\|이름"` syntax              |
 | SQL injection protection     | Yes       | Strict parsing in conditionals     |
 | Output parameters            | Yes       | Via `params_out` dict              |
 
