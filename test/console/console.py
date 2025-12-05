@@ -11,6 +11,7 @@ sys.path.append(__file__[0 : __file__.find("psycopg2_client") + len("psycopg2_cl
 # pylint: disable=wrong-import-position
 from psycopg2_client import Psycopg2Client
 from psycopg2_client_settings import Psycopg2ClientSettings
+from db_client import DbClient
 
 load_dotenv()
 
@@ -161,6 +162,16 @@ def read_using_en_ko():
     print(json.dumps(rows, ensure_ascii=False))
 
 
+def use_db_client():
+    """use inherited class to not use db_settings every time"""
+
+    db_client = DbClient()
+    row = db_client.read_row("read_user_id_all", {})
+
+    # RealDictRow({'user_id': 'gildong.hong'})
+    print(row)
+
+
 create_tables()
 upsert_user()
 upsert_user_params_out()
@@ -170,3 +181,4 @@ read_user_one_row()
 read_user_all_rows()
 read_using_conditional()
 read_using_en_ko()
+use_db_client()
