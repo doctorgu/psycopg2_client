@@ -34,4 +34,4 @@ test = [
 [project.urls]
 homepage = "https://github.com/doctorgu/psycopg2-client"
 repository = "https://github.com/doctorgu/psycopg2-client"
-documentation = "https://github.com/doctorgu/psycopg2-client/README.md"
+documentation = "https://github.com/doctorgu/psycopg2-client"
