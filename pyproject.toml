@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "psycopg2-client"
-version = "1.0.1"
+version = "1.0.2"
 description = "Psycopg2 helper function to run PostgreSQL query with #if support"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = "The Unlicense (Unlicense)"
 authors = [
     {name = "Gu Park", email = "doctorgu@kakao.com"}
 ]
